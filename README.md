@@ -1,19 +1,23 @@
-# prac1
+# Flutter Practice 1
 
-A new Flutter project created with FlutLab - https://flutlab.io
+A simple Flutter application developed as part of a Flutter and Object-Oriented Programming (OOP) practice activity.
 
-## Getting Started
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Basic Flutter UI and widgets
+- Object-Oriented Programming concepts
+- Multiple screens
+- Reusable components
+- Responsive layout
+- Practice
 
-- https://flutter.dev/docs/get-started/codelab
-- https://flutter.dev/docs/cookbook
+## Technologies
 
-For help getting started with Flutter, view our
-https://flutter.dev/docs, which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- FlutLab
 
-## Getting Started: FlutLab - Flutter Online IDE
+## Student
 
-- How to use FlutLab? Please, view our https://flutlab.io/docs
-- Join the discussion and conversation on https://flutlab.io/residents
+**Sherwin Labe**  
+IT Student
