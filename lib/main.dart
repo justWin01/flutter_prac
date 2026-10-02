@@ -18,10 +18,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// First Screen
 class MyHomePage extends StatelessWidget {
   final String title;
 
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({
+    super.key,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +38,7 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+// Registration Form
 class UserForm extends StatefulWidget {
   const UserForm({super.key});
 
@@ -48,29 +53,29 @@ class _FormState extends State<UserForm> {
   final passwordController = TextEditingController();
   final confirmpasswordController = TextEditingController();
 
-  String info = "";
-
   void submitForm() {
     if (firstnameController.text.isEmpty ||
         lastnameController.text.isEmpty ||
         !emailController.text.contains("@") ||
         passwordController.text.isEmpty ||
         passwordController.text != confirmpasswordController.text) {
-      setState(() {
-        info = "Invalid input\nPlease check your details.";
-      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid input. Please check your details."),
+        ),
+      );
     } else {
-      setState(() {
-        info = "Registration Successful\n\n"
-            "Name: ${firstnameController.text} ${lastnameController.text}\n"
-            "Email: ${emailController.text}";
-      });
-
-      firstnameController.clear();
-      lastnameController.clear();
-      emailController.clear();
-      passwordController.clear();
-      confirmpasswordController.clear();
+      // Navigate to the second screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegistrationResultScreen(
+            firstname: firstnameController.text,
+            lastname: lastnameController.text,
+            email: emailController.text,
+          ),
+        ),
+      );
     }
   }
 
@@ -149,16 +154,70 @@ class _FormState extends State<UserForm> {
                 child: const Text("REGISTER"),
               ),
             ),
-            const SizedBox(height: 20),
-            Text(
-              info,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// Second Screen
+class RegistrationResultScreen extends StatelessWidget {
+  final String firstname;
+  final String lastname;
+  final String email;
+
+  const RegistrationResultScreen({
+    super.key,
+    required this.firstname,
+    required this.lastname,
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Registration Result"),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.check_circle,
+                size: 80,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Registration Successful!",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Name: $firstname $lastname",
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "Email: $email",
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("BACK"),
+              ),
+            ],
+          ),
         ),
       ),
     );
